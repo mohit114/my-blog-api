@@ -7,7 +7,9 @@ const contactSchema = new Schema({
 	contact: {type: String},
 	subject: {type: String},
 	message: {type: String},
-	isRead: {type: Boolean, default: false}
+	receivedDate: {type: Date, default: Date.now},
+	isRead: {type: Boolean, default: false},
+	readDate: {type: Date}
 })
 
 const Contact = mongoose.model('Contact', contactSchema);
