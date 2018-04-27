@@ -24,4 +24,13 @@ router.post('/contact', (req, res, next) => {
 
 });
 
+router.get('/messages',(req, res, next) => {
+    contactModel.find({}, (err, messages) => {        
+        if(err)
+            res.status(400).send("Unable to get notification messages : " + err.message);
+        else 
+            res.status(200).send(messages);
+    })
+})
+
 module.exports = router;
