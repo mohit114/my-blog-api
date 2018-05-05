@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userModel = require('../models/user');
 const contactModel = require('../models/contact');
+const subscriberModel = require('../models/subscriber');
 
 router.get('/', (req, res, next) => {
     res.status(200).json({
@@ -41,5 +42,23 @@ router.put('/mark/:notificationid', (req, res, next) => {
          res.status(200).send(msg);
     });
 })
+
+router.post('/subscribe', (req, res, next) => {
+    subscriberModel.find({email : req.body.email}).exec(function(err, user){
+        if(user.length){
+            res.status(200).json({'message' : 'You have already subscribed to my blog. Thank you.'})
+        }
+        else{
+             var newSubscriber = new subscriberModel({
+                email: req.body.email
+            });
+            newSubscriber.save().then(result => {
+                res.status(200).json({'message': 'You have successfully subscribed to my blog. Thank you.'});
+            }).catch(err => {
+                res.status(400).send("Unable to add subscriber to database. Error : " + err.message);
+            });
+        }
+    });
+});
 
 module.exports = router;
