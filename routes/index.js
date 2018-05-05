@@ -31,6 +31,15 @@ router.get('/messages',(req, res, next) => {
         else 
             res.status(200).send(messages);
     })
+});
+
+router.put('/mark/:notificationid', (req, res, next) => {
+    const body = {isRead: true};
+    contactModel.update({_id: req.params.notificationid}, body, function(err, msg){
+         if(err)
+            res.status(400).send( err.message);
+         res.status(200).send(msg);
+    });
 })
 
 module.exports = router;
