@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const contactSchema = new Schema({
+const notificationSchema = new Schema({
 	fullName: {type: String, required: true},
 	email: {type: String, required: true},
 	contact: {type: String},
@@ -9,8 +9,8 @@ const contactSchema = new Schema({
 	message: {type: String},
 	receivedDate: {type: Date, default: Date.now},
 	isRead: {type: Boolean, default: false},
-	readDate: {type: Date}
+	readDate: {type: Date, default: null}
 })
 
-const Contact = mongoose.model('Contact', contactSchema);
-module.exports = Contact;
+const Notification = mongoose.model('Notification', notificationSchema);
+module.exports = Notification;
