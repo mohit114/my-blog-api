@@ -67,6 +67,7 @@ router.post('/addBlog', (req, res, next) => {
         Title: req.body.blogTitle,
         AddedBy: 'Mohit Maharjan',
         TopImageUrl: req.body.blogImageUrl,
+        Snippet: req.body.blogSnippet,
         Body: req.body.blogBody,
         SideImageUrl : null
     });

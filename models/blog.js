@@ -6,6 +6,7 @@ const blogSchema = new Schema({
     AddedDate: {type: Date, default: Date.now},
     AddedBy: {type: String, required: true},
     TopImageUrl: {type: String},
+    Snippet: {type: String, required: true},
     Body: {type: String, required: true},
     SideImageUrl: {type: String},
     IsNew: {type: Boolean, default: true},
