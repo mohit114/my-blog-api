@@ -3,6 +3,7 @@ const router = express.Router();
 const userModel = require('../models/user');
 const notificationModel = require('../models/messageNotification');
 const subscriberModel = require('../models/subscriber');
+const blogModel = require('../models/blog');
 
 router.get('/', (req, res, next) => {
     res.status(200).json({
@@ -59,6 +60,21 @@ router.post('/subscribe', (req, res, next) => {
             });
         }
     });
+});
+
+router.post('/addBlog', (req, res, next) => {
+     var newBlog = new blogModel({
+        Title: req.body.blogTitle,
+        AddedBy: 'Mohit Maharjan',
+        TopImageUrl: req.body.blogImageUrl,
+        Body: req.body.blogBody,
+        SideImageUrl : null
+    });
+     newBlog.save().then(result => {
+        res.status(200).json({ error: false, message: 'Successfully added the blog.'});
+     }).catch(err => {
+        res.status(400).json({error: true, message: err.message});
+     });
 });
 
 module.exports = router;
