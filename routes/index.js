@@ -78,4 +78,22 @@ router.post('/addBlog', (req, res, next) => {
      });
 });
 
+router.get('/blog/:id', (req, res, next) => {
+     blogModel.findOne({'_id': req.params.id}).sort({AddedDate: 'desc'}).exec((err, blog) => {        
+        if(err)
+            res.status(400).send("Unable to fetch blog with id : " + req.params.id + ". Error : " + err.message);
+        else 
+            res.status(200).send(blog);
+    })
+})
+
+router.get('/blog', (req, res, next) => {
+     blogModel.find({'IsNew': true}).sort({AddedDate: 'desc'}).exec((err, blogs) => {        
+        if(err)
+            res.status(400).send("Unable to fetch blogs. Error : " + err.message);
+        else 
+            res.status(200).send(blogs);
+    })
+})
+
 module.exports = router;
