@@ -63,8 +63,12 @@ router.post('/subscribe', (req, res, next) => {
 });
 
 router.post('/addBlog', (req, res, next) => {
+     var currentDate = new Date();
      var newBlog = new blogModel({
         Title: req.body.blogTitle,
+        AddedDate: currentDate,
+        AddedYear: currentDate.getFullYear(),
+        AddedMonth: currentDate.getMonth(),
         AddedBy: 'Mohit Maharjan',
         TopImageUrl: req.body.blogImageUrl,
         Snippet: req.body.blogSnippet,
