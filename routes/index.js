@@ -72,7 +72,7 @@ router.post('/addBlog', (req, res, next) => {
         SideImageUrl : null
     });
      newBlog.save().then(result => {
-        res.status(200).json({ error: false, message: 'Successfully added the blog.'});
+        res.status(200).json({ error: false, message: 'Successfully added the blog.', output: result});
      }).catch(err => {
         res.status(400).json({error: true, message: err.message});
      });
